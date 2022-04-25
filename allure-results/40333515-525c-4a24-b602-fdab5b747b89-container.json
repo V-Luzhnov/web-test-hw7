@@ -1,0 +1,1 @@
+{"uuid":"40333515-525c-4a24-b602-fdab5b747b89","name":"Успешная авторизация","children":["c7ba07af-3dce-4d7f-bdf4-894dbe15e032"],"befores":[{"name":"goTo","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1650874168963,"stop":1650874171551}],"afters":[],"start":1650874168960,"stop":1650874177995}
