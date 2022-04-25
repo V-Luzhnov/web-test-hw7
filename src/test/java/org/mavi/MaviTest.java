@@ -1,4 +1,4 @@
-package org.hw7.mavi;
+package org.mavi;
 
 import org.junit.jupiter.api.*;
 

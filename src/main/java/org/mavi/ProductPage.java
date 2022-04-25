@@ -1,4 +1,4 @@
-package org.hw7.mavi;
+package org.mavi;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
