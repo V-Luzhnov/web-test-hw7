@@ -5,6 +5,7 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 import java.io.IOException;
@@ -127,6 +128,7 @@ public class MaviTest extends AbstractTest {
 //                getDriver().findElement(new SalePage(getDriver()).pageTitlePath()).getText());
 
         try {
+//            getDriver().findElement(new SalePage(getDriver()).pageTitlePath());
             getDriver().findElement(new SalePage(getDriver()).pageTitlePath()).getText().equals("Распродажа");
         } catch (NoSuchElementException e){
             Utils.makeScreenshot(getDriver(),

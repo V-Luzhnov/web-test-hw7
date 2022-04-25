@@ -1,18 +1,19 @@
 package org.mavi;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 
 /**
  * Web UI Java. Homework 7
@@ -24,23 +25,27 @@ public abstract class AbstractTest {
 
     final static java.util.Properties prop = new java.util.Properties();
 
-    private static WebDriver driver;
+    static EventFiringWebDriver driver;
 
     @BeforeAll
     static void init(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
-        //options.addArguments("--headless");
+//        options.addArguments("--headless");
         options.addArguments("start-maximized");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        options.setPageLoadTimeout(Duration.ofSeconds(10));
+
+        driver = new EventFiringWebDriver(new ChromeDriver(options));
+        driver.register(new MyWebDriverEventListener());
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     @BeforeEach
     void goTo(){
         Assertions.assertDoesNotThrow( ()-> driver.navigate().to(getURL()), "Страница недоступна");
-
+        Assertions.assertTrue(true);
         // закрыть сообщение о куках, если оно есть, нажатием ОК
         closeCookiesMessage();
     }
@@ -50,8 +55,20 @@ public abstract class AbstractTest {
         if(driver !=null) driver.quit();
     }
 
-    public static WebDriver getDriver() {
-        return driver;
+    @AfterEach
+    public void checkBrowser(){
+        List<LogEntry> allLogRows = getDriver().manage().logs().get(LogType.BROWSER).getAll();
+        if(!allLogRows.isEmpty()){
+            if (allLogRows.size() > 0 ) {
+                allLogRows.forEach(logEntry -> {
+                    System.out.println(logEntry.getMessage());
+                });
+            }
+        }
+    }
+
+    public WebDriver getDriver() {
+        return this.driver;
     }
 
     public void logout() {
