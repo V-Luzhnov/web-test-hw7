@@ -1,1 +1,0 @@
-{"uuid":"c909ef13-eeab-4d48-a38e-b53a90570394","name":"Успешный поиск товара","children":["a7d895d4-677e-48e4-b157-99b77baa2191"],"befores":[{"name":"goTo","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1650874202290,"stop":1650874206391}],"afters":[],"start":1650874202288,"stop":1650874209048}

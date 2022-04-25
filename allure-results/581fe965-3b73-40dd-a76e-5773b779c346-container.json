@@ -1,1 +1,0 @@
-{"uuid":"581fe965-3b73-40dd-a76e-5773b779c346","name":"Успешный добавление товара в избранное","children":["9d6ef4cf-676f-476f-bccf-bda8e60d409d"],"befores":[{"name":"goTo","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1650874288440,"stop":1650874292821}],"afters":[],"start":1650874288438,"stop":1650874304726}

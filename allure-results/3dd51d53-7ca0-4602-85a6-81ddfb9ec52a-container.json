@@ -1,1 +1,0 @@
-{"uuid":"3dd51d53-7ca0-4602-85a6-81ddfb9ec52a","name":"Проверка открытия страниц раздела Покупатели в подвале","children":["0c1bedd5-785a-4c34-a87f-71aeee48411f"],"befores":[{"name":"goTo","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1650874209051,"stop":1650874213639}],"afters":[],"start":1650874209049,"stop":1650874219922}
