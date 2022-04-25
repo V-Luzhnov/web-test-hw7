@@ -25,7 +25,6 @@
     <junit>4.13.2</junit>
     <maven.surefire.plugin>2.22.1</maven.surefire.plugin>
     <maven.surefire.report.plugin>3.0.0-M6</maven.surefire.report.plugin>
-
     <aspectj.version>1.8.13</aspectj.version>
     <allure.version>2.17.3</allure.version>
     <allure-maven.version>2.10.0</allure-maven.version>
@@ -96,14 +95,14 @@
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-junit5</artifactId>
-      <version>${allure.version} </version>
+      <version>${allure.version}</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-java-commons</artifactId>
-      <version>2.17.3</version>
+      <version>${allure.version}</version>
       <scope>compile</scope>
     </dependency>
 
@@ -111,10 +110,6 @@
 
   <build>
     <plugins>
-<!--      <plugin>-->
-<!--        <artifactId>maven-surefire-plugin</artifactId>-->
-<!--        <version>${maven.surefire.plugin}</version>-->
-<!--      </plugin>-->
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -152,7 +147,7 @@
         <version> ${allure-maven.version} </version>
         <configuration>
 
-          <buildDirectory>C:\IDEA_projects\web-test</buildDirectory>
+          <buildDirectory>C:\IDEA_projects\web-test-hw7</buildDirectory>
         </configuration>
       </plugin>
     </plugins>
