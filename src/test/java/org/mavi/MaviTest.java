@@ -129,7 +129,7 @@ public class MaviTest extends AbstractTest {
 
         try {
 //            getDriver().findElement(new SalePage(getDriver()).pageTitlePath());
-            getDriver().findElement(new SalePage(getDriver()).pageTitlePath()).getText().equals("Распродажа");
+            getDriver().findElement(new SalePage(getDriver()).pageTitlePath()).getText().equals("Распродажа666");
         } catch (NoSuchElementException e){
             Utils.makeScreenshot(getDriver(),
                     "failure- mavi.MaviTest.test" + System.currentTimeMillis() + ".png");
