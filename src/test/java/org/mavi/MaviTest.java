@@ -1,6 +1,12 @@
 package org.mavi;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Link;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.io.IOException;
 
@@ -15,6 +21,9 @@ public class MaviTest extends AbstractTest {
     @Test
     @Tag("Positive")
     @DisplayName("Успешная авторизация")
+    @Description("Данные для автоизации хранятся в тектовых файлах в resources")
+    @Link("https://ru.mavi.com")
+    @Severity(SeverityLevel.CRITICAL)
     public void authorizationTestPositive() {
 
         new HeaderSide(getDriver()).clickHeaderAccBtn();
@@ -28,22 +37,35 @@ public class MaviTest extends AbstractTest {
 
         Assertions.assertEquals("Личные данные",
                 getDriver().findElement(new AccountMenu(getDriver()).prTitlePath()).getText());
+
+        MyUtils.makeScreenshot(getDriver(),"mavi-test-AuthorizationPage.png");
     }
 
     @Test
     @Tag("Positive")
     @DisplayName("Успешный поиск товара")
+    @Link("https://ru.mavi.com")
+    @Severity(SeverityLevel.NORMAL)
     public void searchTestPositive() throws IOException {
 
         new HeaderSide(getDriver()).performSearch(getSearchObject());
 
         Assertions.assertEquals("Результаты поиска: " + getSearchObject(),
                 getDriver().findElement(new SearchPage(getDriver()).catalogSearchPath()).getText());
+
+        try {
+            getDriver().findElement(By.xpath(".//*[text()='Результаты поиска: " + getSearchObject() + "']"));
+        } catch (NoSuchElementException e){
+            MyUtils.makeScreenshot(getDriver(),
+                    "failure-mavi-test-SearchPage-" + System.currentTimeMillis() + ".png");
+        }
     }
 
     @Test
     @Tag("Positive")
     @DisplayName("Успешное добавление товара в корзину")
+    @Link("https://ru.mavi.com")
+    @Severity(SeverityLevel.CRITICAL)
     public void addToCartTestPositive() throws InterruptedException, IOException {
 
         getDriver().navigate().to(getURL() + getURLbryuki());
@@ -62,11 +84,15 @@ public class MaviTest extends AbstractTest {
         new HeaderSide(getDriver()).clickOrderBtn();
 
         Assertions.assertTrue(new CartPage(getDriver()).isDisplayedBasketList());
+
+        MyUtils.makeScreenshot(getDriver(),"mavi-test-CartPage.png");
     }
 
     @Test
     @Tag("Positive")
     @DisplayName("Успешное добавление товара в избранное")
+    @Link("https://ru.mavi.com")
+    @Severity(SeverityLevel.NORMAL)
     public void addToFavoritesTestPositive() throws IOException, InterruptedException {
 
         getDriver().navigate().to(getURL() + getURLbryuki());
@@ -94,42 +120,65 @@ public class MaviTest extends AbstractTest {
         new HeaderSide(getDriver()).clickFavBtn();
 
         Assertions.assertTrue(new FavoritesPage(getDriver()).isDisplayedCatalogList());
+
+        MyUtils.makeScreenshot(getDriver(),"mavi-test-FavoritesPage.png");
     }
 
     @Test
     @Tag("Positive")
     @DisplayName("Успешный переход на страницу Распродажа")
+    @Link("https://ru.mavi.com")
+    @Severity(SeverityLevel.MINOR)
     public void saleTestPositive() {
 
         new HeaderSide(getDriver()).clickOutletBtn();
 
         Assertions.assertEquals("Распродажа",
                 getDriver().findElement(new SalePage(getDriver()).pageTitlePath()).getText());
+
+        try {
+            getDriver().findElement(new SalePage(getDriver()).pageTitlePath());
+        } catch (NoSuchElementException e){
+            MyUtils.makeScreenshot(getDriver(),
+                    "failure-mavi-test-SalePage" + System.currentTimeMillis() + ".png");
+        }
     }
 
     @Test
     @Tag("Positive")
     @DisplayName("Проверка открытия страниц раздела Покупатели в подвале")
+    @Link("https://ru.mavi.com")
+    @Severity(SeverityLevel.MINOR)
     public void footerBuyersTestPositive() {
 
         new FooterSide(getDriver()).clickPaymentShippingBtn();
         Assertions.assertEquals("Оплата",
                 getDriver().findElement(new CommonPages(getDriver()).pageTitlePath()).getText());
 
+        MyUtils.makeScreenshot(getDriver(),"mavi-test-PaymentShipping.png");
+
         new FooterSide(getDriver()).clickExchangeReturnBtn();
         Assertions.assertEquals("Возврат товара",
                 getDriver().findElement(new CommonPages(getDriver()).pageTitlePath()).getText());
+
+        MyUtils.makeScreenshot(getDriver(),"mavi-test-ExchangeReturn.png");
 
         new FooterSide(getDriver()).clickSizeTableBtn();
         Assertions.assertEquals("Таблица размеров",
                 getDriver().findElement(new CommonPages(getDriver()).pageTitlePath()).getText());
 
+        MyUtils.makeScreenshot(getDriver(),"mavi-test-SizeTable.png");
+
         new FooterSide(getDriver()).clickPrivacyBtn();
         Assertions.assertEquals("Положение о порядке продаж товаров дистанционным способом в интернет-магазине MAVI",
                 getDriver().findElement(new CommonPages(getDriver()).pageTitlePath()).getText());
 
+        MyUtils.makeScreenshot(getDriver(),"mavi-test-Privacy.png");
+
         new FooterSide(getDriver()).clickFittingBtn();
         Assertions.assertEquals("Примерка",
                 getDriver().findElement(new CommonPages(getDriver()).pageTitlePath()).getText());
+
+        MyUtils.makeScreenshot(getDriver(),"mavi-test-Fitting.png");
     }
 }
