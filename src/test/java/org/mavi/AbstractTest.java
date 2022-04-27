@@ -25,7 +25,7 @@ public abstract class AbstractTest {
 
     final static java.util.Properties prop = new java.util.Properties();
 
-    static EventFiringWebDriver driver;
+    static EventFiringWebDriver eventDriver;
 
     @BeforeAll
     static void init(){
@@ -36,15 +36,15 @@ public abstract class AbstractTest {
         options.addArguments("start-maximized");
         options.setPageLoadTimeout(Duration.ofSeconds(10));
 
-        driver = new EventFiringWebDriver(new ChromeDriver(options));
-        driver.register(new MyWebDriverEventListener());
+        eventDriver = new EventFiringWebDriver(new ChromeDriver(options));
+        eventDriver.register(new MyWebDriverEventListener());
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        eventDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     @BeforeEach
     void goTo(){
-        Assertions.assertDoesNotThrow( ()-> driver.navigate().to(getURL()), "Страница недоступна");
+        Assertions.assertDoesNotThrow( ()-> eventDriver.navigate().to(getURL()), "Страница недоступна");
         Assertions.assertTrue(true);
         // закрыть сообщение о куках, если оно есть, нажатием ОК
         closeCookiesMessage();
@@ -52,7 +52,7 @@ public abstract class AbstractTest {
 
     @AfterAll
     static void close(){
-        if(driver !=null) driver.quit();
+        if(eventDriver !=null) eventDriver.quit();
     }
 
     @AfterEach
@@ -68,7 +68,7 @@ public abstract class AbstractTest {
     }
 
     public WebDriver getDriver() {
-        return this.driver;
+        return this.eventDriver;
     }
 
     public void logout() {

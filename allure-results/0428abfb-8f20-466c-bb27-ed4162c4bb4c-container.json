@@ -1,0 +1,1 @@
+{"uuid":"0428abfb-8f20-466c-bb27-ed4162c4bb4c","name":"Успешный переход на страницу Распродажа","children":["16d87df8-6553-455e-9cbe-62ef9a096a49"],"befores":[{"name":"goTo","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1650884767641,"stop":1650884770113}],"afters":[],"start":1650884767634,"stop":1650884772151}
